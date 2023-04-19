@@ -1,6 +1,8 @@
 #import Databasestuff.py 
 import Items.py
 import Champions.py
+from Champions import *
+from Items import *
 
 def main():
     print("League of Legends Wiki")

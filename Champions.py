@@ -1,3 +1,6 @@
+import main.py
+from main import *
+
 def champions(champchoice):
     match champchoice:
         case 1:
@@ -48,5 +51,6 @@ def Lanesearch(lanechoice):
             print("\tJungle ")
             lane = "jg"
             #
+            
         case other:
             print("Error: Invalid Choice")
