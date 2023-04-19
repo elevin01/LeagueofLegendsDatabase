@@ -1,6 +1,3 @@
-import main
-from main import *
-
 def Item(itemchoice):
      match itemchoice:
                 case 1: 

@@ -1,6 +1,3 @@
-import main.py
-from main import *
-
 def champions(champchoice):
     match champchoice:
         case 1:
