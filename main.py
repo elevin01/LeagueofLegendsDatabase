@@ -1,6 +1,5 @@
-#import Databasestuff.py 
-import Items.py
-import Champions.py
+import Champions
+import Items
 from Champions import *
 from Items import *
 
