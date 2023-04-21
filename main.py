@@ -65,8 +65,20 @@ def main():
         Errorfun.Errorcase()
 
 
-# except here hopefully
+while True:
+    main()
+    facts = False
+    print("Enter 0 to quit ")
+    try:
+        mainchoice = int(input())
+        if mainchoice == 0:
+            facts = True
+    except:
+        print()
+    if facts:
+        break
 
-main()
+
+
 
 
