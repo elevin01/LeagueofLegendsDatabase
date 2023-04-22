@@ -40,5 +40,5 @@ def Itemchooser(itemtype):
             print("\tBoots")
             #
         case other: 
-            print("Error: Ivalid Choice")
+            Errorfun.Errorswitch()
             
