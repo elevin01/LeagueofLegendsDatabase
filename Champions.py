@@ -9,9 +9,9 @@ def champions(champchoice):
         case 2:
             print("Choose the lane you want to view from below")
             print("1. Top Lane (Baron Lane) ")
-            print("2. Mid Lane ")
-            print("3. Bot Lane (Dragon Lane - ADC)")
-            print("4. Support Lane (Dragon Lane - Support)")
+            print("2. Middle Lane ")
+            print("3. Bottom Lane (Dragon Lane - ADC)")
+            print("4. Support Lane (Dragon Lane - Sup)")
             print("5. Jungle ")
             print("\nEnter your choice: ")
             try:
