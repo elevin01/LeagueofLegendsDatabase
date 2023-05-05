@@ -6,6 +6,11 @@ CREATE TABLE GAMEMODE (
   name varchar(255), release_date date, player_no int, primary key(name)
 );
 
+CREATE TABLE TOURNAMENT (
+  name varchar(255), organizer  varchar(255), t_date date, gamemode varchar(255), 
+  primary key (name, t_date), foreign key(gamemode) references GAMEMODE(name)
+);
+
 CREATE TABLE LOCATION (
   name varchar(255), main_race varchar(255), primary key(name)
 );
@@ -39,35 +44,19 @@ CREATE TABLE SKIN (
 );
 
 
-
-
-
 CREATE TABLE PLAYER (
- username varchar(255), main_lane varchar(255), ranks varchar(255), lvl int, main_champ varchar(255), 
- foreign key (main_champ) references CHAMPION(name), primary key(username)
+ username varchar(255), id char(4), main_lane varchar(255), ranks varchar(255), lvl int, main_champ varchar(255), 
+ foreign key (main_champ) references CHAMPION(name), primary key(username, id)
 );
 
 CREATE TABLE GUILD (
- creator varchar(255), name varchar(255), lvl int, 
+ creator varchar(255), creator_id char(4), name varchar(255), lvl int, 
  foreign key (creator) references PLAYER(username), 
- primary key(creator, name)
+ primary key(creator, creator_id, name)
 );
 
-CREATE TABLE TOURNAMENT (
-  name varchar(255), t_date date, gamemode varchar(255), 
-  g1_creator varchar(255), g1_name varchar(255), 
-  g2_creator varchar(255), g2_name varchar(255),
-  primary key (name, t_date), foreign key(gamemode) references GAMEMODE(name),
-  foreign key(g1_creator) references GUILD(creator), 
-  foreign key(g2_creator) references GUILD(creator),
-  foreign key(g1_name) references GUILD(name), 
-  foreign key(g2_name) references GUILD(name)
-);
-
-ALTER TABLE PLAYER ADD g_creator varchar(255);
-ALTER TABLE PLAYER ADD g_name varchar(255);
-ALTER TABLE PLAYER ADD foreign key(g_name) references GUILD(name);
-ALTER TABLE PLAYER ADD foreign key(g_creator) references GUILD(creator);
+ALTER TABLE PLAYER ADD guild varchar(255);
+ALTER TABLE PLAYER ADD foreign key(guild) references GUILD(name);
 
 CREATE TABLE I_USABLE (
   gamemode varchar(255), item varchar(255), primary key (gamemode ,item), 
@@ -85,12 +74,13 @@ CREATE TABLE SS_USABLE (
 );
 
 CREATE TABLE CHAMP_LANE (
-  champ varchar(255), lane varchar(255), primary key (champ, lane), 
+  champ varchar(255), lane varchar(255), primary key (champ), 
   foreign key(champ) references CHAMPION(name)
 );
 
 CREATE TABLE OWN (
-  player varchar(255), skin varchar(255), primary key (player, skin), 
+  player varchar(255), player_id char(4), skin varchar(255), primary key (player, player_id, skin), 
   foreign key(player) references PLAYER(username), 
   foreign key(skin) references SKIN(name) 
 );
+

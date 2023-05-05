@@ -1,4 +1,6 @@
 import Errorfun
+import tkinter
+"""
 def Item(itemchoice):
      match itemchoice:
                 case 1: 
@@ -23,22 +25,54 @@ def Item(itemchoice):
                     
                 case other: 
                    Errorfun.Errorswitch()
-                    
-                    
+"""
+def Item(itemchoice, root):
+    for widget in root.winfo_children():
+        widget.destroy()
+    itemlabel = tkinter.Label(root, text="Item Selection", font=("Ariel", 20))
+    itemlabel.pack(pady=15)
+    match itemchoice:
+        case 1:
+            item_label = tkinter.Label(root, text="Enter Item name:", font=("Ariel", 16))
+            item_label.pack(pady=10)
+            itemchoice = tkinter.Entry(root)
+            itemchoice.pack()
+            submit_button = tkinter.Button(root, text="Submit", command=lambda : print(itemchoice.get()))
+            submit_button.pack()
+        case 2:
+            item_type = tkinter.StringVar(root)
+            itemtypes = ["Fighter", "Mage", "Tank", "Support", "Assassin", "Marksman", "Boots"]
+            dropdown = tkinter.OptionMenu(root,item_type, *itemtypes)
+            dropdown.pack()
+            submit_button = tkinter.Button(root, text="Submit", command=lambda : Itemchooser(item_type.get()))
+            submit_button.pack()
+        case 3:
+            itemlabel = tkinter.Label(root, text="Code has not been written yet")
+            itemlabel.pack()
+        case other:
+            quit()
+
+
 def Itemchooser(itemtype):
     match itemtype:
-        case 1: 
-            print("\tAttack Damage\n")
+        case "Fighter":
+            print("\nFighter")
             #
-        case 2: 
-            print("\tMagic Damage\n")
+        case "Mage":
+            print("\nMagic")
             #
-        case 3:
-            print("\tDefense Items")
+        case "Tank":
+            print("Tank")
             #
-        case 4: 
-            print("\tBoots")
+        case "Support":
+            print("Support")
             #
-        case other: 
+        case "Assassin":
+            print("\nAssassin")
+        case "Marksman":
+            print("\nMarksman")
+        case "Boots":
+            print("\nBoots")
+        case other:
             Errorfun.Errorswitch()
-            
+    quit()

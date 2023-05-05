@@ -1,14 +1,26 @@
 import Errorfun
-def Players(playerchoice):
+import tkinter
+from tkinter import messagebox
+def Players(playerchoice, root):
+    for widget in root.winfo_children():
+        widget.destroy()
+    playerlabel = tkinter.Label(root, text= "Player Menu ", font=("Ariel", 20))
+    playerlabel.pack(pady=15)
     match playerchoice:
         case 1:
-            print("Enter the name of the player name: ")
-            playername = str(input()).strip()
+            playername = tkinter.Label(root, text= "Enter the name of the player name: ", font=("Ariel", 16))
+            playername.pack(pady=10)
+            name_input = tkinter.Entry(root)
+            name_input.pack()
+            submit_button = tkinter.Button(root, text="Submit", command=lambda : print(name_input.get()))
+            submit_button.pack()
 
         case 2:
-            print("\nPlayer List\n\n")
+            playerrank = tkinter.Label(root, text="Player List")
+            playerrank.pack()
 
         case 3:
+            """
             print("Enter player username: ")
             playeruser = str(input()).strip()
             while True:
@@ -76,6 +88,106 @@ def Players(playerchoice):
                 playerlevel = int(input())
             except:
                 Errorfun.Errorcase()
+            """
+            root.geometry("600x500")
+            playername = tkinter.Label(root, text="Enter the name of the player name: ")
+            playername.pack(pady=10)
+            name_input = tkinter.Entry(root)
+            name_input.pack()
+            playerid = tkinter.Label(root, text="Enter player id: ")
+            playerid.pack(pady=10)
+            id_input = tkinter.Entry(root)
+            id_input.pack()
+            lane_choices = {
+                            "Top Lane (Baron Lane)": "top",
+                            "Mid Lane": "mid",
+                            "Bot Lane (Dragon Lane - ADC)": "duo",
+                            "Support Lane (Dragon Lane - Support)": "sup",
+                            "Jungle": "jg"
+                            }
+            lane_choice = tkinter.StringVar(root)
+            lane_choice.set("Select a lane")
+            dropdown = tkinter.OptionMenu(root, lane_choice, *lane_choices.keys())
+            dropdown.pack(pady=10)
+            rank_choices = [
+                     "Iron",
+                     "Bronze",
+                     "Silver",
+                     "Gold",
+                     "Platinum",
+                     "Diamond",
+                     "Master",
+                     "Grandmaster",
+                     "Challenger"
+                ]
+            rank_choice = tkinter.StringVar(root)
+            rank_choice.set("Select a rank")
+            dropdown = tkinter.OptionMenu(root, rank_choice, *rank_choices)
+            dropdown.pack(pady=10)
+            playerlvl = tkinter.Label(root, text="Enter Player Level: ")
+            playerlvl.pack(pady=10)
+            lvl_input = tkinter.Entry(root)
+            lvl_input.pack()
+            submit_button2 = tkinter.Button(root, text="Submit", command=lambda: addplaya())
+            submit_button2.pack(pady=20)
+            def addplaya():
+                player_name = name_input.get()
+                player_name = str(player_name)
+                if not player_name:
+                    Errorfun.Errorswitch()
+                    return
+                player_id = id_input.get()
+                player_id = str(player_id)
+                if not len(player_id) == 4:
+                    messagebox.showerror("Error", "Player ID length cannot exceed 4 characters")
+                    return
+                player_lane = lane_choice.get()
+                player_lane = str(player_lane)
+                if not player_lane:
+                    Errorfun.Errorswitch()
+                    return
+                player_rank = rank_choice.get()
+                player_rank = str(player_rank)
+                if not player_rank:
+                    Errorfun.Errorswitch()
+                    return
+                player_lvl = lvl_input.get()
+                face = False
+                try:
+                    player_lvl = int(player_lvl)
+                    face = False
+                except:
+                   messagebox.showerror("Error", "Player level must be a number")
+                   face = True
+                if face:
+                    return
+        case 4:
+            root.geometry("600x500")
+            player_namelabel = tkinter.Label(root, text="Edit Player Information", font=("Ariel", 16))
+            player_namelabel.pack(pady=15)
+            player_ed1 = tkinter.Label(root,text="Enter Player name: ")
+            player_ed1.pack(pady=10)
+            player_name = tkinter.Entry(root)
+            player_name.pack()
+            player_ed2 = tkinter.Label(root,text="Enter Player ID: ")
+            player_ed2.pack(pady=10)
+            player_id = tkinter.Entry(root)
+            player_id.pack()
+            submit_button2 = tkinter.Button(root, text="Submit", command=lambda: edit01())
+            submit_button2.pack(pady=20)
+            def edit01():
+                #authentication goes here
+                player_ed1 = tkinter.Label(root, text="Code not written yet ")
+                player_ed1.pack(pady=10)
+                Errorfun.Qcase()
+
+
+        case other:
+            Errorfun.Errorcase()
+            quit()
+
+
+
 
 
 

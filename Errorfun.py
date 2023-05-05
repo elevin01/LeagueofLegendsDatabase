@@ -1,6 +1,15 @@
+import tkinter
+from tkinter import messagebox
+import sys
 def Errorcase():
-    print("Error: Invalid Input")
+    messagebox.showerror("Error", "Invalid Input")
+    return
 
 def Errorswitch():
-    print("Error: Invalid Choice")
+    messagebox.showerror("Error", "Invalid Choice")
+
+def Qcase():
+    messagebox.showinfo("!", "You will now exit the program")
+    quit()
+
 

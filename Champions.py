@@ -1,5 +1,7 @@
 import Errorfun
-def champions(champchoice):
+import tkinter
+"""
+def champions(champchoice, root):
     match champchoice:
         case 1:
             print("Enter the champion name: ")
@@ -23,36 +25,65 @@ def champions(champchoice):
 
         case other:
             Errorfun.Errorswitch()
+"""
+def champions(champchoice, root):
+    for widget in root.winfo_children():
+        widget.destroy()
+    champmenu = tkinter.Label(root, text="Champion Selection", font=("Roboto", 20))
+    champmenu.pack(pady=15)
+    match champchoice:
+        case 1:
+            champ_label = tkinter.Label(root, text="Enter the champion name: ", font=("Ariel", 16))
+            champ_label.pack(pady=10)
+            champ_entry = tkinter.Entry(root)
+            champ_entry.pack()
+            submit_button = tkinter.Button(root, text="Submit", command=lambda: Champsearch(champ_entry.get()))
+            submit_button.pack()
 
+        case 2:
+            lane_label = tkinter.Label(root, text="\n\nChoose the lane you want to view from below", font=("Ariel",16))
+            lane_label.pack(pady=10)
+            lane_choices = {"Top Lane (Baron Lane)": "top", "Mid Lane": "mid", "Bot Lane (Dragon Lane - ADC)": "duo",
+                            "Support Lane (Dragon Lane - Support)": "sup", "Jungle": "jg"}
+            lane_choice = tkinter.StringVar(root)
+            lane_choice.set("Select a lane")
+            dropdown = tkinter.OptionMenu(root, lane_choice, *lane_choices.keys())
+            dropdown.pack()
+            submit_button = tkinter.Button(root, text="Submit", command=lambda: Lanesearch(lane_choices[lane_choice.get()]))
+            submit_button.pack()
+
+        case other:
+            Errorfun.Errorswitch()
 
 def Champsearch(champname):
     #
     champ = str(champname).strip()
+    quit()
 
 
 def Lanesearch(lanechoice):
     lane = ""
     match lanechoice:
-        case 1:
+        case "top":
             print("\tTop Lane (Baron Lane)")
             lane = "top"
             #
-        case 2:
+        case "mid":
             print("\tMid Lane")
             lane = "mid"
             #
-        case 3:
+        case "duo":
             print("\tBot Lane (Dragon Lane - ADC)")
             lane = "duo"
             #
-        case 4:
+        case "sup":
             print("\tSupport Lane (Dragon Lane - Support)")
             lane = "sup"
             #
-        case 5:
+        case "jg":
             print("\tJungle ")
             lane = "jg"
-            #
-
         case other:
             Errorfun.Errorswitch()
+
+    quit()
