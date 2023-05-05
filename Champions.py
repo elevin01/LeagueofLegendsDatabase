@@ -1,7 +1,7 @@
 import Errorfun
 import tkinter
 """
-def champions(champchoice, root): reererererferererer
+def champions(champchoice, root):
     match champchoice:
         case 1:
             print("Enter the champion name: ")
