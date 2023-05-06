@@ -90,7 +90,7 @@ def Players(playerchoice, root):
                 Errorfun.Errorcase()
             """
             root.geometry("600x500")
-            playername = tkinter.Label(root, text="Enter the name of the player name: ")
+            playername = tkinter.Label(root, text="Enter player username: ")
             playername.pack(pady=10)
             name_input = tkinter.Entry(root)
             name_input.pack()
@@ -101,8 +101,8 @@ def Players(playerchoice, root):
             lane_choices = {
                             "Top Lane (Baron Lane)": "top",
                             "Mid Lane": "mid",
-                            "Bot Lane (Dragon Lane - ADC)": "duo",
-                            "Support Lane (Dragon Lane - Support)": "sup",
+                            "Bot Lane (Dragon Lane - ADC)": "bot",
+                            "Support (Dragon Lane - Support)": "sup",
                             "Jungle": "jg"
                             }
             lane_choice = tkinter.StringVar(root)
@@ -165,7 +165,7 @@ def Players(playerchoice, root):
             root.geometry("600x500")
             player_namelabel = tkinter.Label(root, text="Edit Player Information", font=("Ariel", 16))
             player_namelabel.pack(pady=15)
-            player_ed1 = tkinter.Label(root,text="Enter Player name: ")
+            player_ed1 = tkinter.Label(root,text="Enter Player username: ")
             player_ed1.pack(pady=10)
             player_name = tkinter.Entry(root)
             player_name.pack()

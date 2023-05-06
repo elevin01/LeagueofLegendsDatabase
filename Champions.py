@@ -43,8 +43,8 @@ def champions(champchoice, root):
         case 2:
             lane_label = tkinter.Label(root, text="\n\nChoose the lane you want to view from below", font=("Ariel",16))
             lane_label.pack(pady=10)
-            lane_choices = {"Top Lane (Baron Lane)": "top", "Mid Lane": "mid", "Bot Lane (Dragon Lane - ADC)": "duo",
-                            "Support Lane (Dragon Lane - Support)": "sup", "Jungle": "jg"}
+            lane_choices = {"Top Lane (Baron Lane)": "top", "Mid Lane": "mid", "Bot Lane (Dragon Lane - ADC)": "bot",
+                            "Support (Dragon Lane - Support)": "sup", "Jungle": "jg"}
             lane_choice = tkinter.StringVar(root)
             lane_choice.set("Select a lane")
             dropdown = tkinter.OptionMenu(root, lane_choice, *lane_choices.keys())

@@ -59,7 +59,7 @@ def Itemchooser(itemtype):
             print("\nFighter")
             #
         case "Mage":
-            print("\nMagic")
+            print("\nMage")
             #
         case "Tank":
             print("Tank")
