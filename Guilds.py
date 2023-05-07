@@ -1,6 +1,16 @@
+import mysql.connector
 import Errorfun
 import tkinter
 from tkinter import messagebox
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="username",
+  password="pass123",
+  database="loldb"
+)
+mycursor = mydb.cursor()
+
 def Guildsinlol(guildchoice, root):
     for widget in root.winfo_children():
         widget.destroy()
@@ -32,6 +42,10 @@ def Guildsinlol(guildchoice, root):
             #print("\nEnter name of the guild: ")
             #guildname = str(input()).strip()
             #
+            myquery = "SELECT * FROM GUILD AS G WHERE G.name = " + guildname
+            mycursor.execute (myquery)
+            for x in mycursor:
+                print(x)
 
         case 2:
             getGuild(root)
@@ -81,7 +95,9 @@ def Guildsinlol(guildchoice, root):
 
             #
             """
-
+            myquery = "INSERT INTO GUILD VALUES(" + guildname + "," + guildcreator + "," + creatid + "," + guild1v1 + ")"
+            mycursor.execute (myquery)
+            # Look at above two lines again
         case other:
             Errorfun.Errorswitch()
 

@@ -1,6 +1,16 @@
+import mysql.connector
 import Errorfun
 import tkinter
 from tkinter import messagebox
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="username",
+  password="pass123",
+  database="loldb"
+)
+mycursor = mydb.cursor()
+
 def Players(playerchoice, root):
     for widget in root.winfo_children():
         widget.destroy()
@@ -15,10 +25,17 @@ def Players(playerchoice, root):
             submit_button = tkinter.Button(root, text="Submit", command=lambda : print(name_input.get()))
             submit_button.pack()
 
+            myquery = "SELECT * FROM PLAYER AS P WHERE P.username =" + name_input
+            mycursor.execute (myquery)
+            for x in mycursor:
+                print(x)
         case 2:
             playerrank = tkinter.Label(root, text="Player List")
             playerrank.pack()
-
+            myquery = "SELECT * FROM PLAYER AS P WHERE P.ranks =" + playerrank
+            mycursor.execute (myquery)
+            for x in mycursor:
+                print(x)         #look at connector code again
         case 3:
             """
             print("Enter player username: ")
@@ -161,6 +178,8 @@ def Players(playerchoice, root):
                    face = True
                 if face:
                     return
+            myquery = "INSERT INTO PLAYER VALUES(" + player_name + "," + player_id + "," + player_lane + "," + player_rank + "," + player_lvl + ")" 
+            mycursor.execute (myquery) # Going to have to look at this
         case 4:
             root.geometry("600x500")
             player_namelabel = tkinter.Label(root, text="Edit Player Information", font=("Ariel", 16))
@@ -180,7 +199,8 @@ def Players(playerchoice, root):
                 player_ed1 = tkinter.Label(root, text="Code not written yet ")
                 player_ed1.pack(pady=10)
                 Errorfun.Qcase()
-
+            myquery = "UPDATE PLAYER SET main_lane = " + player_lane + ", ranks = " + player_rank + ", 1v1 = " + player_lvl + " WHERE username = " + player_name + " AND id = " + player_id; 
+            mycursor.execute (myquery) # Going to have to look at this Assumming player_lane etc are the new updated fields.
 
         case other:
             Errorfun.Errorcase()

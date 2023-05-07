@@ -1,5 +1,15 @@
+import mysql.connector
 import Errorfun
 import tkinter
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="username",
+  password="pass123",
+  database="loldb"
+)
+mycursor = mydb.cursor()
+
 """
 def Item(itemchoice):
      match itemchoice:
@@ -39,6 +49,11 @@ def Item(itemchoice, root):
             itemchoice.pack()
             submit_button = tkinter.Button(root, text="Submit", command=lambda : print(itemchoice.get()))
             submit_button.pack()
+
+            myquery = "SELECT * FROM ITEM WHERE ITEM.name =" + itemchoice
+            mycursor.execute(myquery)
+            for x in mycursor:
+                print(x)
         case 2:
             item_type = tkinter.StringVar(root)
             itemtypes = ["Fighter", "Mage", "Tank", "Support", "Assassin", "Marksman", "Boots"]
@@ -57,22 +72,46 @@ def Itemchooser(itemtype):
     match itemtype:
         case "Fighter":
             print("\nFighter")
-            #
+            myquery = "SELECT * FROM ITEM WHERE ITEM.type = Fighter" 
+            mycursor.execute(myquery)
+            for x in mycursor:
+                print(x)            
         case "Mage":
             print("\nMage")
-            #
+            myquery = "SELECT * FROM ITEM WHERE ITEM.type = Mage" 
+            mycursor.execute(myquery)
+            for x in mycursor:
+                print(x)    
         case "Tank":
             print("Tank")
-            #
+            myquery = "SELECT * FROM ITEM WHERE ITEM.type = Tank" 
+            mycursor.execute(myquery)
+            for x in mycursor:
+                print(x)    
         case "Support":
             print("Support")
-            #
+            myquery = "SELECT * FROM ITEM WHERE ITEM.type = Support" 
+            mycursor.execute(myquery)
+            for x in mycursor:
+                print(x)    
         case "Assassin":
             print("\nAssassin")
+            myquery = "SELECT * FROM ITEM WHERE ITEM.type = Assassin" 
+            mycursor.execute(myquery)
+            for x in mycursor:
+                print(x)    
         case "Marksman":
             print("\nMarksman")
+            myquery = "SELECT * FROM ITEM WHERE ITEM.type = Marksman" 
+            mycursor.execute(myquery)
+            for x in mycursor:
+                print(x)    
         case "Boots":
             print("\nBoots")
+            myquery = "SELECT * FROM ITEM WHERE ITEM.type = Boots" 
+            mycursor.execute(myquery)
+            for x in mycursor:
+                print(x)    
         case other:
             Errorfun.Errorswitch()
     quit()

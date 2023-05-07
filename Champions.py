@@ -1,5 +1,13 @@
+import mysql.connector
 import Errorfun
 import tkinter
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="username",
+  password="pass123",
+  database="loldb"
+)
+mycursor = mydb.cursor()
 """
 def champions(champchoice, root):
     match champchoice:
@@ -56,8 +64,12 @@ def champions(champchoice, root):
             Errorfun.Errorswitch()
 
 def Champsearch(champname):
-    #
     champ = str(champname).strip()
+    #
+    myquery = "SELECT * FROM CHAMPION AS C WHERE C.name = " + champ
+    mycursor.execute(myquery)
+    for x in mycursor:
+        print(x)
     quit()
 
 
@@ -67,22 +79,38 @@ def Lanesearch(lanechoice):
         case "top":
             print("\tTop Lane (Baron Lane)")
             lane = "top"
-            #
+            myquery = "SELECT C.champ FROM CHAMP_LANE AS C WHERE C.lane = " + lane
+            mycursor.execute(myquery)
+            for x in mycursor:
+                print(x)
         case "mid":
             print("\tMid Lane")
             lane = "mid"
-            #
+            myquery = "SELECT C.champ FROM CHAMP_LANE AS C WHERE C.lane = " + lane
+            mycursor.execute(myquery)
+            for x in mycursor:
+                print(x)
         case "duo":
             print("\tBot Lane (Dragon Lane - ADC)")
             lane = "duo"
-            #
+            myquery = "SELECT C.champ FROM CHAMP_LANE AS C WHERE C.lane = " + lane
+            mycursor.execute(myquery)
+            for x in mycursor:
+                print(x)
         case "sup":
             print("\tSupport Lane (Dragon Lane - Support)")
             lane = "sup"
-            #
+            myquery = "SELECT C.champ FROM CHAMP_LANE AS C WHERE C.lane = " + lane
+            mycursor.execute(myquery)
+            for x in mycursor:
+                print(x)
         case "jg":
             print("\tJungle ")
             lane = "jg"
+            myquery = "SELECT C.champ FROM CHAMP_LANE AS C WHERE C.lane = " + lane
+            mycursor.execute(myquery)
+            for x in mycursor:
+                print(x)            
         case other:
             Errorfun.Errorswitch()
 
