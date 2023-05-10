@@ -67,12 +67,12 @@ CREATE TABLE TOURNAMENT (
   foreign key(g2_cid) references GUILD(creator_id)
 );
 
-ALTER TABLE PLAYER ADD g_creator varchar(255);
-ALTER TABLE PLAYER ADD g_name varchar(255);
-ALTER TABLE PLAYER ADD g_cid char(4);
-ALTER TABLE PLAYER ADD foreign key(g_name) references GUILD(name);
-ALTER TABLE PLAYER ADD foreign key(g_creator) references GUILD(creator);
-ALTER TABLE PLAYER ADD foreign key(g_cid) references GUILD(creator_id);
+ALTER TABLE PLAYER ADD COLUMN g_creator varchar(255);
+ALTER TABLE PLAYER ADD COLUMN g_name varchar(255);
+ALTER TABLE PLAYER ADD COLUMN g_cid char(4);
+ALTER TABLE PLAYER ADD FOREIGN KEY (g_name) REFERENCES GUILD(name);
+ALTER TABLE PLAYER ADD FOREIGN KEY (g_creator) REFERENCES GUILD(creator);
+ALTER TABLE PLAYER ADD FOREIGN KEY (g_cid) REFERENCES GUILD(creator_id);
 
 CREATE TABLE I_USABLE (
   gamemode varchar(255), item varchar(255), primary key (gamemode ,item), 
@@ -101,3 +101,46 @@ CREATE TABLE OWN (
   foreign key(player_id) references PLAYER(id), 
   foreign key(skin) references SKIN(name) 
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
