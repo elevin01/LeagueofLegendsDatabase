@@ -68,6 +68,7 @@ CREATE TABLE TOURNAMENT (
   foreign key(g2_creator, g2_cid, g2_name) references GUILD(creator, creator_id, name)
 );
 
+
 CREATE TABLE I_USABLE (
   gamemode varchar(255), item varchar(255), primary key (gamemode ,item), 
   foreign key(gamemode ) references GAMEMODE(name), foreign key(item) references ITEM(name)
@@ -96,6 +97,11 @@ CREATE TABLE OWN (
   foreign key(skin) references SKIN(name) 
 );
 
+
+
+
+
+-- insert some values
 INSERT INTO SUMMONER_SPELL  VALUES ('Heal', 'Heals yourself and an ally', 240);
 INSERT INTO SUMMONER_SPELL  VALUES ('Ghost', 'Gives movement speed and ignores unit collision, resets on kill', 210);
 INSERT INTO SUMMONER_SPELL  VALUES ('Barrier', 'Gives a shield', 180);
@@ -107,7 +113,6 @@ INSERT INTO SUMMONER_SPELL VALUES ('Flash', 'Teleports your champion a short dis
 INSERT INTO SUMMONER_SPELL VALUES ('Teleport', 'Teleports your champion to an allied turret, minion, or ward', 360);
 INSERT INTO SUMMONER_SPELL VALUES ('Smite', 'Deals true damage to monsters or enemy minions, healing you and granting bonus gold', 15);
 INSERT INTO SUMMONER_SPELL VALUES ('Clarity', 'Restores mana to you and nearby allies', 240);
-
 
 INSERT INTO GAMEMODE VALUES ('Summoner''s Rift', '2009-10-27', 10);
 INSERT INTO GAMEMODE VALUES ('ARAM', '2010-06-29', 10);
@@ -135,57 +140,42 @@ INSERT INTO ITEM VALUES ('Zhonya''s Hourglass', 2900, 'Mage', 'Provides a stasis
 INSERT INTO ITEM VALUES ('Guardian Angel', 2800, 'Fighter', 'Revives your champion upon death');
 INSERT INTO ITEM VALUES ('Thornmail', 2900, 'Tank', 'Reflects damage taken from basic attacks');
 INSERT INTO ITEM VALUES ('Trinity Force', 3733, 'Fighter', 'Provides various stats and sheen attack');
+INSERT INTO ITEM VALUES ('Duskblade of Draktharr', 2900, 'Assassin', 'Provides lethality and burst damage');
+INSERT INTO ITEM VALUES ('Sunfire Aegis', 3200, 'Tank', 'Grants bonus health and deals damage to nearby enemies');
+INSERT INTO ITEM VALUES ('Infinity Edge', 3400, 'Marksman', 'Increases critical strike damage');
+INSERT INTO ITEM VALUES ('Manamune', 2400, 'Marksman', 'Provides bonus attack damage and mana');
+INSERT INTO ITEM VALUES ('Luden''s Echo', 3200, 'Mage', 'Grants ability power and bonus burst damage');
+
 
 INSERT INTO RUNE VALUES ('Conqueror', 'Precision', true, 'Gain stacks of AD or AP when damaging enemy champions');
 INSERT INTO RUNE VALUES ('Electrocute', 'Domination', true, 'Deal bonus damage after hitting an enemy with 3 separate abilities or attacks');
 INSERT INTO RUNE VALUES ('Aftershock', 'Resolve', true, 'Gain bonus resistances after immobilizing an enemy champion');
 INSERT INTO RUNE VALUES ('Arcane Comet', 'Sorcery', true, 'Deal damage to enemy champions with abilities, periodically');
 INSERT INTO RUNE VALUES ('Grasp of the Undying', 'Resolve', true, 'Gain bonus health and deal damage to enemy champions with basic attacks');
+INSERT INTO RUNE VALUES ('First Strike', 'Inspiration', true, 'Grants bonus damage and some gold if you hit an enemy before you are hit');
+
 
 INSERT INTO CHAMPION VALUES ('Ashe', 'Human', 450, 'Freljord', 'Marksman', 'Infinity Edge', 'Conqueror');
 INSERT INTO CHAMPION VALUES ('Lux', 'Human', 3150, 'Demacia', 'Mage', 'Zhonya''s Hourglass', 'Arcane Comet');
 INSERT INTO CHAMPION VALUES ('Darius', 'Human', 4800, 'Noxus', 'Fighter', 'Guardian Angel', 'Conqueror');
 INSERT INTO CHAMPION VALUES ('Nautilus', 'Void Being', 4800, 'Bilgewater', 'Tank', 'Thornmail', 'Aftershock');
 INSERT INTO CHAMPION VALUES ('Garen', 'Human', 450, 'Demacia', 'Fighter', 'Trinity Force', 'Grasp of the Undying');
+INSERT INTO CHAMPION VALUES ('Zed', 'Human', 6300, 'Ionia', 'Assassin', 'temporary', 'temporary');
+INSERT INTO CHAMPION VALUES ('Sion', 'Undead', 1350, 'temporary', 'Tank', 'temporary', 'temporary');
+INSERT INTO CHAMPION VALUES ('Draven', 'Human', 6300, 'temporary', 'Marksman', 'temporary', 'temporary');
+INSERT INTO CHAMPION VALUES ('Ezreal', 'Human', 4800, 'temporary', 'Marksman', 'temporary', 'temporary');
+INSERT INTO CHAMPION VALUES ('LeBlanc', 'Human', 3150, 'temporary', 'Mage', 'temporary', 'temporary');
 
 
+INSERT INTO SKIN VALUES ('Freljord Ashe', 1350, 'Winter Event', 'Ashe');
+INSERT INTO SKIN VALUES ('Elementalist Lux', 3250, 'Legendary Event', 'Lux');
+INSERT INTO SKIN VALUES ('Dreadnova Darius', 1350, 'Space-themed Event', 'Darius');
+INSERT INTO SKIN VALUES ('Abyssal Nautilus', 1350, 'Underwater Event', 'Nautilus');
+INSERT INTO SKIN VALUES ('Steel Legion Garen', 975, 'Military-themed Event', 'Garen');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+INSERT INTO PLAYER VALUES ('Faker', '1234', 'Mid', 'Challenger', 99, 'Zed', 'Faker', '1234');
+INSERT INTO PLAYER VALUES ('thebausffs', '5678', 'Top', 'Diamond', 85, 'Sion', 'thebausffs', '5678');
+INSERT INTO PLAYER VALUES ('Tyler1', '9012', 'ADC', 'Master', 77, 'Draven', 'Tyler1', '9012');
+INSERT INTO PLAYER VALUES ('Doublelift', '3456', 'ADC', 'Grandmaster', 92, 'Ezreal', 'Doublelift', '3456');
+INSERT INTO PLAYER VALUES ('Caps', '7890', 'Mid', 'Challenger', 88, 'LeBlanc', 'Caps', '7890');
 
