@@ -42,7 +42,11 @@ CREATE TABLE SKIN (
 CREATE TABLE PLAYER (
  username varchar(255), id char(4), main_lane varchar(255), 
  ranks varchar(255), lvl int, main_champ varchar(255), 
+ g_creator varchar(255),
+ g_cid char(4),
  foreign key (main_champ) references CHAMPION(name), 
+ foreign key (g_creator) references PLAYER(username),
+ foreign key (g_cid) references PLAYER(id),
  primary key(username, id)
 );
 
@@ -63,11 +67,6 @@ CREATE TABLE TOURNAMENT (
   foreign key(g1_creator, g1_cid, g1_name) references GUILD(creator, creator_id, name), 
   foreign key(g2_creator, g2_cid, g2_name) references GUILD(creator, creator_id, name)
 );
-
-ALTER TABLE PLAYER ADD COLUMN g_creator varchar(255);
-ALTER TABLE PLAYER ADD COLUMN g_name varchar(255);
-ALTER TABLE PLAYER ADD COLUMN g_cid char(4);
-ALTER TABLE PLAYER ADD FOREIGN KEY (g_creator, g_cid, g_name) REFERENCES GUILD(creator, creator_id, name);
 
 CREATE TABLE I_USABLE (
   gamemode varchar(255), item varchar(255), primary key (gamemode ,item), 
