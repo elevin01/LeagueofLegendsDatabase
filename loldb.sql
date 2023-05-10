@@ -96,7 +96,6 @@ CREATE TABLE OWN (
   foreign key(player_id) references PLAYER(id), 
   foreign key(skin) references SKIN(name) 
 );
-
 INSERT INTO SUMMONER_SPELL  VALUES ('Heal', 'Heals yourself and an ally', 240);
 INSERT INTO SUMMONER_SPELL  VALUES ('Ghost', 'Gives movement speed and ignores unit collision, resets on kill', 210);
 INSERT INTO SUMMONER_SPELL  VALUES ('Barrier', 'Gives a shield', 180);
@@ -144,14 +143,12 @@ INSERT INTO ITEM VALUES ('Manamune', 2400, 'Marksman', 'Provides bonus attack da
 INSERT INTO ITEM VALUES ('Luden''s Echo', 3200, 'Mage', 'Grants ability power and bonus burst damage');
 INSERT INTO ITEM VALUES ('Guardian''s Blade', 3200, 'Fighter', 'Gives good stats to start with');
 
-
 INSERT INTO RUNE VALUES ('Conqueror', 'Precision', true, 'Gain stacks of AD or AP when damaging enemy champions');
 INSERT INTO RUNE VALUES ('Electrocute', 'Domination', true, 'Deal bonus damage after hitting an enemy with 3 separate abilities or attacks');
 INSERT INTO RUNE VALUES ('Aftershock', 'Resolve', true, 'Gain bonus resistances after immobilizing an enemy champion');
 INSERT INTO RUNE VALUES ('Arcane Comet', 'Sorcery', true, 'Deal damage to enemy champions with abilities, periodically');
 INSERT INTO RUNE VALUES ('Grasp of the Undying', 'Resolve', true, 'Gain bonus health and deal damage to enemy champions with basic attacks');
 INSERT INTO RUNE VALUES ('First Strike', 'Inspiration', true, 'Grants bonus damage and some gold if you hit an enemy before you are hit');
-
 
 INSERT INTO CHAMPION VALUES ('Ashe', 'Human', 450, 'Freljord', 'Marksman', 'Infinity Edge', 'Conqueror');
 INSERT INTO CHAMPION VALUES ('Lux', 'Human', 3150, 'Demacia', 'Mage', 'Zhonya''s Hourglass', 'Arcane Comet');
@@ -176,8 +173,9 @@ INSERT INTO PLAYER VALUES ('thebausffs', '5678', 'Top', 'Grandmaster', 468, 'Sio
 INSERT INTO PLAYER VALUES ('Tyler1', '9012', 'ADC', 'Challenger', 840, 'Draven', 'Tyler1', '9012');
 INSERT INTO PLAYER VALUES ('Doublelift', '3456', 'ADC', 'Grandmaster', 648, 'Ezreal', 'Tyler1', '9012');
 INSERT INTO PLAYER VALUES ('Caps', '7890', 'Mid', 'Challenger', 234, 'LeBlanc', 'Tyler1', '9012');
-INSERT INTO PLAYER VALUES ('XxZazaDemonxX', '4200', 'Support', 'Bronze', 34, 'Nautilus', 'XxZazaDemonxX', '4200');
+INSERT INTO PLAYER VALUES ('XxZazaDemonxX', '4200', 'Sup', 'Bronze', 34, 'Nautilus', 'XxZazaDemonxX', '4200');
 INSERT INTO PLAYER VALUES ('JuiceLord', '6969', 'ADC', 'Platinum', 34, 'Ashe', 'XxZazaDemonxX', '4200');
+
 
 INSERT INTO GUILD VALUES ('Faker', '1234', 'SKT T1', 10);
 INSERT INTO GUILD VALUES ('Tyler1', '9012', 'Alpha Draven', 8);
@@ -252,4 +250,112 @@ INSERT INTO OWN VALUES
 ('JuiceLord', '6969', 'Freljord Ashe'), 
 ('Doublelift', '3456', 'Freljord Ashe'),
 ('Caps', '7890', 'Dreadnova Darius'), ('Caps', '7890', 'Steel Legion Garen');
+
+-- update ashe
+INSERT INTO RUNE VALUES ('Lethal Tempo', 'Precision', true, 'Gain attack speed when auto attacking champions, at full attack speed gain increased range');
+UPDATE CHAMPION SET best_rune = 'Lethal Tempo' WHERE CHAMPION.name = 'Ashe';
+
+-- add new tuples
+INSERT INTO MONSTER VALUES ('Raptor', 'Summoner''s Rift', 'Jungle monster');
+INSERT INTO MONSTER VALUES ('Scuttle crab', 'Summoner''s Rift', 'Jungle monster');
+INSERT INTO BELONG VALUES ('Summoner''s Rift', 'Raptor');
+INSERT INTO BELONG VALUES ('Summoner''s Rift', 'Scuttle crab');
+
+INSERT INTO RUNE VALUES ('Triumph', 'Precision', false, 'Heal and gain extra gold upon enemy takedown');
+INSERT INTO RUNE VALUES ('Ultimate Hunter', 'Domination', false, 'Gain a stack of ultimate ability haste on unique champion takedown');
+INSERT INTO RUNE VALUES ('Hextech Flashtraption', 'Inspiration', false, 'While flash is on cooldown, charge up a flash over 2.5 seconds');
+INSERT INTO RUNE VALUES ('Press the Attack', 'Precision', True, '3 basic attacks on an enemy deals bonus damage and causes the enemy to take increased damage for 6 seconds');
+INSERT INTO RUNE VALUES ('Dark Harvest', 'Domination', True, 'Damaging an enemy below 50% health deals bonus damage based on stacks, and grants a stack of Dark Harvest');
+INSERT INTO RUNE VALUES ('Hail of Blades', 'Domination', True, 'The first 3 basic attacks on a champion gain 110% attack speed');
+INSERT INTO RUNE VALUES ('Summon Aery', 'Sorcery', True, 'Damaging abilities on enemies deals extra damage or buffing/shielding/healing an ally provides an extra shield to the ally');
+INSERT INTO RUNE VALUES ('Phase Rush', 'Sorcery', True, 'After damaging an enemy 3 times, gain bonus movement speed');
+INSERT INTO RUNE VALUES ('Glacial Augment', 'Inspiration', True, 'Immobilizing an enemy causes 3 glacial rays to emenate from the contact, slowing enemies and reducing their damage');
+
+INSERT INTO LOCATION VALUES ('Zaun', 'Human');
+INSERT INTO LOCATION VALUES ('Shurima', 'Human');
+INSERT INTO LOCATION VALUES ('Targon', 'Celestial');
+INSERT INTO LOCATION VALUES ('Shadow Isles', 'Undead');
+
+INSERT INTO ITEM VALUES ('Liandry''s Anguish', 3200, 'Mage', 'Grants max health burn on abilities');
+INSERT INTO ITEM VALUES ('Rod of Ages', 2800, 'Mage', 'Grants ability power, health and mana and increases bonuses over time until 10 minutes, then level up');
+INSERT INTO ITEM VALUES ('Jak''sho, The Protean', 3200, 'Tank', 'For each second in combat gain resistances until 6 seconds, then damage enemies and heal');
+INSERT INTO ITEM VALUES ('Kraken Slayer', 3400, 'Marksman', 'Every 3 basic attacks deals extra true damage');
+INSERT INTO ITEM VALUES ('Blade of the Ruined King', 3300, 'Fighter', 'Deal increased max health damage on basica attacks, 3 basic attacks deal extra magic damage');
+
+
+INSERT INTO I_USABLE VALUES ('Summoner''s Rift', 'Liandry''s Anguish');
+INSERT INTO I_USABLE VALUES ('Summoner''s Rift', 'Rod of Ages');
+INSERT INTO I_USABLE VALUES ('Summoner''s Rift', 'Jak''sho, The Protean');
+INSERT INTO I_USABLE VALUES ('Summoner''s Rift', 'Kraken Slayer');
+INSERT INTO I_USABLE VALUES ('Summoner''s Rift', 'Blade of the Ruined King');
+INSERT INTO I_USABLE VALUES ('ARAM', 'Liandry''s Anguish');
+INSERT INTO I_USABLE VALUES ('ARAM', 'Rod of Ages');
+INSERT INTO I_USABLE VALUES ('ARAM', 'Jak''sho, The Protean');
+INSERT INTO I_USABLE VALUES ('ARAM', 'Kraken Slayer');
+INSERT INTO I_USABLE VALUES ('ARAM', 'Blade of the Ruined King');
+INSERT INTO I_USABLE VALUES ('Twisted Treeline', 'Liandry''s Anguish');
+INSERT INTO I_USABLE VALUES ('Twisted Treeline', 'Rod of Ages');
+INSERT INTO I_USABLE VALUES ('Twisted Treeline', 'Jak''sho, The Protean');
+INSERT INTO I_USABLE VALUES ('Twisted Treeline', 'Kraken Slayer');
+INSERT INTO I_USABLE VALUES ('Twisted Treeline', 'Blade of the Ruined King');
+INSERT INTO I_USABLE VALUES ('Urf', 'Liandry''s Anguish');
+INSERT INTO I_USABLE VALUES ('Urf', 'Rod of Ages');
+INSERT INTO I_USABLE VALUES ('Urf', 'Jak''sho, The Protean');
+INSERT INTO I_USABLE VALUES ('Urf', 'Kraken Slayer');
+INSERT INTO I_USABLE VALUES ('Urf', 'Blade of the Ruined King');
+INSERT INTO I_USABLE VALUES ('One for All', 'Liandry''s Anguish');
+INSERT INTO I_USABLE VALUES ('One for All', 'Rod of Ages');
+INSERT INTO I_USABLE VALUES ('One for All', 'Jak''sho, The Protean');
+INSERT INTO I_USABLE VALUES ('One for All', 'Kraken Slayer');
+INSERT INTO I_USABLE VALUES ('One for All', 'Blade of the Ruined King');
+
+
+INSERT INTO CHAMPION VALUES ('Aurelion Sol', 'Star Forger', 4800, 'Targon', 'Mage', 'Rod of Ages', 'Dark Harvest');
+INSERT INTO CHAMPION VALUES ('Volibear', 'Demigod', 1350, 'Freljord', 'Fighter', 'Jak''sho, The Protean', 'Conqueror');
+INSERT INTO CHAMPION VALUES ('Rammus', NULL, 1350, NULL, 'Tank', 'Thornmail', 'Aftershock');
+INSERT INTO CHAMPION VALUES ('Viego', 'Undead', 4800, 'Shadow Isles', 'Fighter', 'Blade of the Ruined King', 'Conqueror');
+
+INSERT INTO CHAMP_LANE VALUES 
+('Aurelion Sol', 'Mid'), 
+('Volibear', 'Top'), ('Volibear', 'Jungle'), 
+('Rammus', 'Top'), ('Rammus', 'Jungle'), ('Rammus', 'Mid'),
+('Viego', 'Mid'), ('Viego', 'Jungle');
+
+INSERT INTO SKIN VALUES ('Star Guardian Aurelion Sol', 1350, 'Star Guardian Event', 'Aurelion Sol');
+INSERT INTO SKIN VALUES ('Thunder Lord Volibear', 975, 'None', 'Volibear');
+INSERT INTO SKIN VALUES ('Full Metal Rammus', 1350, 'None', 'Rammus');
+INSERT INTO SKIN VALUES ('Sentinel Viego', 1350, 'Sentinel Event', 'Viego');
+
+INSERT INTO PLAYER VALUES ('XxBlazingBudMasterxX', '1234', 'Top', 'Iron', 30, 'Aurelion Sol', 'Faker', '1234');
+INSERT INTO PLAYER VALUES ('AquaSniper', '3245', 'Jungle', 'Gold', 217, 'Viego', 'AquaSniper', '3245');
+INSERT INTO PLAYER VALUES ('FlameSnowman', '4833', 'Mid', 'Gold', 98, 'Lux', 'AquaSniper', '3245');
+INSERT INTO PLAYER VALUES ('Forthorne', '5722', 'ADC', 'Gold', 92, 'Draven', 'AquaSniper', '3245');
+INSERT INTO PLAYER VALUES ('YellowJello', '4321', 'Top', 'Silver', 70, 'Garen', 'AquaSniper', '3245');
+INSERT INTO PLAYER VALUES ('llamaobama1', '9756', 'Sup', 'Iron', 31, 'Ashe', 'AquaSniper', '3245');
+
+INSERT INTO GUILD VALUES ('AquaSniper', '3245', 'C9', 10);
+
+INSERT INTO OWN VALUES 
+('AquaSniper', '3245', 'Sentinel Viego'), 
+('AquaSniper', '3245', 'Full Metal Rammus'),
+('AquaSniper', '3245', 'Star Guardian Aurelion Sol'), 
+('YellowJello', '4321', 'Thunder Lord Volibear'),
+('YellowJello', '4321', 'Steel Legion Garen'), 
+('Forthorne', '5722', 'Freljord Ashe'), 
+('Forthorne', '5722', 'Sentinel Viego'), 
+('FlameSnowman', '4833', 'Abyssal Nautilus');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
