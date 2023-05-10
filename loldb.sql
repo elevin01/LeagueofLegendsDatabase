@@ -54,13 +54,6 @@ CREATE TABLE GUILD (
  primary key(creator, name, creator_id)
 );
 
-ALTER TABLE PLAYER ADD COLUMN g_creator varchar(255);
-ALTER TABLE PLAYER ADD COLUMN g_name varchar(255);
-ALTER TABLE PLAYER ADD COLUMN g_cid char(4);
-ALTER TABLE PLAYER ADD FOREIGN KEY (g_name) REFERENCES GUILD(name);
-ALTER TABLE PLAYER ADD FOREIGN KEY (g_creator) REFERENCES GUILD(creator);
-ALTER TABLE PLAYER ADD FOREIGN KEY (g_cid) REFERENCES GUILD(creator_id);
-
 CREATE TABLE TOURNAMENT (
   name varchar(255), t_date date, gamemode varchar(255), 
   g1_creator varchar(255), g1_name varchar(255), g1_cid char(4),
@@ -68,9 +61,13 @@ CREATE TABLE TOURNAMENT (
   primary key (name, t_date), 
   foreign key(gamemode) references GAMEMODE(name),
   foreign key(g1_creator, g1_cid, g1_name) references GUILD(creator, creator_id, name), 
-  foreign key(g2_creator, g2_cid, g2_name) references GUILD(creator, creator_id, name),
+  foreign key(g2_creator, g2_cid, g2_name) references GUILD(creator, creator_id, name)
 );
 
+ALTER TABLE PLAYER ADD COLUMN g_creator varchar(255);
+ALTER TABLE PLAYER ADD COLUMN g_name varchar(255);
+ALTER TABLE PLAYER ADD COLUMN g_cid char(4);
+ALTER TABLE PLAYER ADD FOREIGN KEY (g_creator, g_cid, g_name) REFERENCES GUILD(creator, creator_id, name);
 
 CREATE TABLE I_USABLE (
   gamemode varchar(255), item varchar(255), primary key (gamemode ,item), 
