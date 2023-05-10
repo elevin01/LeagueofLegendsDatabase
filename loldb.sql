@@ -96,6 +96,57 @@ CREATE TABLE OWN (
   foreign key(skin) references SKIN(name) 
 );
 
+INSERT INTO SUMMONER_SPELL  VALUES ('Heal', 'Heals yourself and an ally', 240);
+INSERT INTO SUMMONER_SPELL  VALUES ('Ghost', 'Gives movement speed and ignores unit collision, resets on kill', 210);
+INSERT INTO SUMMONER_SPELL  VALUES ('Barrier', 'Gives a shield', 180);
+INSERT INTO SUMMONER_SPELL  VALUES ('Mark', 'Throws a snowball that can recast to', 180);
+INSERT INTO SUMMONER_SPELL VALUES ('Cleanse', 'Removes all crowd control debuffs and summoner spell debuffs', 210);
+INSERT INTO SUMMONER_SPELL VALUES ('Ignite', 'Deals true damage over time and reduces healing effects', 180);
+INSERT INTO SUMMONER_SPELL VALUES ('Exhaust', 'Reduces the target enemy champion''s damage output and slows them', 210);
+INSERT INTO SUMMONER_SPELL VALUES ('Flash', 'Teleports your champion a short distance towards the cursor', 300);
+INSERT INTO SUMMONER_SPELL VALUES ('Teleport', 'Teleports your champion to an allied turret, minion, or ward', 360);
+INSERT INTO SUMMONER_SPELL VALUES ('Smite', 'Deals true damage to monsters or enemy minions, healing you and granting bonus gold', 15);
+INSERT INTO SUMMONER_SPELL VALUES ('Clarity', 'Restores mana to you and nearby allies', 240);
+
+
+INSERT INTO GAMEMODE VALUES ('Summoner''s Rift', '2009-10-27', 10);
+INSERT INTO GAMEMODE VALUES ('ARAM', '2010-06-29', 10);
+INSERT INTO GAMEMODE VALUES ('Twisted Treeline', '2009-10-27', 6);
+INSERT INTO GAMEMODE VALUES ('Urf', '2010-04-01', 10);
+INSERT INTO GAMEMODE VALUES ('One for All', '2013-05-29', 10);
+
+INSERT INTO LOCATION VALUES ('Summoner''s Rift', 'None');
+INSERT INTO LOCATION VALUES ('Freljord', 'Human');
+INSERT INTO LOCATION VALUES ('Demacia', 'Human');
+INSERT INTO LOCATION VALUES ('Ionia', 'Vastayan');
+INSERT INTO LOCATION VALUES ('Icathia', 'Void being');
+INSERT INTO LOCATION VALUES ('Bandle City', 'Yordle');
+INSERT INTO LOCATION VALUES ('Bilgewater', 'Mixed');
+INSERT INTO LOCATION VALUES ('Noxus', 'Human');
+
+INSERT INTO MONSTER VALUES ('Baron Nashor', 'Summoner''s Rift', 'Epic Monster');
+INSERT INTO MONSTER VALUES ('Dragon', 'Summoner''s Rift', 'Epic Monster');
+INSERT INTO MONSTER VALUES ('Rift Herald', 'Summoner''s Rift', 'Epic Monster');
+INSERT INTO MONSTER VALUES ('Elder Dragon', 'Summoner''s Rift', 'Epic Monster');
+INSERT INTO MONSTER VALUES ('Blue Sentinel', 'Summoner''s Rift', 'Buff Monster');
+
+INSERT INTO ITEM VALUES ('Infinity Edge', 3400, 'Marksman', 'Increases critical strike damage');
+INSERT INTO ITEM VALUES ('Zhonya''s Hourglass', 2900, 'Mage', 'Provides a stasis effect');
+INSERT INTO ITEM VALUES ('Guardian Angel', 2800, 'Fighter', 'Revives your champion upon death');
+INSERT INTO ITEM VALUES ('Thornmail', 2900, 'Tank', 'Reflects damage taken from basic attacks');
+INSERT INTO ITEM VALUES ('Trinity Force', 3733, 'Fighter', 'Provides various stats and sheen attack');
+
+INSERT INTO RUNE VALUES ('Conqueror', 'Precision', true, 'Gain stacks of AD or AP when damaging enemy champions');
+INSERT INTO RUNE VALUES ('Electrocute', 'Domination', true, 'Deal bonus damage after hitting an enemy with 3 separate abilities or attacks');
+INSERT INTO RUNE VALUES ('Aftershock', 'Resolve', true, 'Gain bonus resistances after immobilizing an enemy champion');
+INSERT INTO RUNE VALUES ('Arcane Comet', 'Sorcery', true, 'Deal damage to enemy champions with abilities, periodically');
+INSERT INTO RUNE VALUES ('Grasp of the Undying', 'Resolve', true, 'Gain bonus health and deal damage to enemy champions with basic attacks');
+
+INSERT INTO CHAMPION VALUES ('Ashe', 'Human', 450, 'Freljord', 'Marksman', 'Infinity Edge', 'Conqueror');
+INSERT INTO CHAMPION VALUES ('Lux', 'Human', 3150, 'Demacia', 'Mage', 'Zhonya''s Hourglass', 'Arcane Comet');
+INSERT INTO CHAMPION VALUES ('Darius', 'Human', 4800, 'Noxus', 'Fighter', 'Guardian Angel', 'Conqueror');
+INSERT INTO CHAMPION VALUES ('Nautilus', 'Void Being', 4800, 'Bilgewater', 'Tank', 'Thornmail', 'Aftershock');
+INSERT INTO CHAMPION VALUES ('Garen', 'Human', 450, 'Demacia', 'Fighter', 'Trinity Force', 'Grasp of the Undying');
 
 
 
