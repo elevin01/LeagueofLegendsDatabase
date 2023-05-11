@@ -1,5 +1,6 @@
 import mysql.connector
 import Errorfun
+import GuildData
 import tkinter
 from tkinter import messagebox
 
@@ -25,8 +26,6 @@ def Guildsinlol(guildchoice, root):
             name_input.pack()
             submit_button = tkinter.Button(root, text="Submit", command=lambda: getguild())
             submit_button.pack()
-            guildnameinput = str(name_input.get())
-            print(guildnameinput)
 
             def getguild():
                 guild_name = name_input.get()
@@ -37,11 +36,9 @@ def Guildsinlol(guildchoice, root):
                         return
                 except:
                     Errorfun.Errorswitch()
-                Errorfun.Qcase()
+                GuildData.findGuild(guild_name,root)
 
-            #print("\nEnter name of the guild: ")
-            #guildname = str(input()).strip()
-            #
+
             myquery = "SELECT * FROM GUILD AS G WHERE G.name = " + guildname
             mycursor.execute (myquery)
             for x in mycursor:
@@ -124,8 +121,11 @@ def getGuild(root):
     submit_button2 = tkinter.Button(root, text="Submit", command=lambda:procesguild())
     submit_button2.pack(pady=20)
     def procesguild():
-        guild_name = guildcrname_input.get()
+        guild_name = guildnameinput.get()
         guild_name = str(guild_name)
+        if guild_name in GuildData.getAll():
+            messagebox.showerror("Error", "Guild already exists")
+            return
         guild_crname = guildcrname_input.get()
         guild_crname = str(guild_crname)
         guild_lvl = guildlvlinput.get()
@@ -135,6 +135,9 @@ def getGuild(root):
             messagebox.showerror("Error", "Guild Level must be a number")
         guild_crid = guildcrid_input.get()
         guild_crid = str(guild_crid)
+        if not len(guild_crid) == 4:
+            messagebox.showerror("Error", "Creator ID length cannot exceed 4 characters")
+            return
         if not guild_name:
             Errorfun.Errorcase()
             return
@@ -147,4 +150,5 @@ def getGuild(root):
         if not guild_crid:
             Errorfun.Errorcase()
             return
-    Errorfun.Qcase()
+        GuildData.addguild(guild_crname,guild_crid,guild_name,guild_lvl,root)
+

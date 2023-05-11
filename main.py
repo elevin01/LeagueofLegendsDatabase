@@ -8,7 +8,7 @@ import sys
 
 def main():
     while True:
-        choices = ["Champions", "Items", "Players", "Guilds", "Quit"]
+        choices = ["Champions", "Items", "Players", "Guilds"]
         root = tkinter.Tk()
         root.geometry('600x300')
         root.title("League of Legends Wiki")
@@ -86,7 +86,7 @@ def menu(choice,root):
                 label3.pack(pady=10)
                 playerbutton1 = tkinter.Button(root, text= " Search Player by name", command=lambda : Players.Players(1,root))
                 playerbutton1.pack()
-                playerbutton2 = tkinter.Button(root, text= " Sort Player by rank ", command= lambda : Players.Players(2,root))
+                playerbutton2 = tkinter.Button(root, text= " Sort Player by level ", command= lambda : Players.Players(2,root))
                 playerbutton2.config(width=15)
                 playerbutton2.pack()
                 playerbutton3 = tkinter.Button(root, text= " Add Player ", command= lambda : Players.Players(3,root))
@@ -115,6 +115,7 @@ def menu(choice,root):
             except:
                 Errorfun.Errorcase()
         case other:
+            print("called it")
             Errorfun.Qcase()
 
 main()
