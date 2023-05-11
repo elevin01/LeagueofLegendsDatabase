@@ -38,6 +38,8 @@ def getGuildfn(name):
     mycursor.execute(myquery, (name,))
     result = mycursor.fetchone()
     return result[0],result[1]
+
+
 def getname(creator, creator_id):
     mycursor = mydb.cursor()
     myquery = "SELECT G.name FROM GUILD AS G WHERE G.creator =\""+creator+"\" AND G.creator_id =\""+creator_id+"\";"

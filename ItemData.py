@@ -22,7 +22,7 @@ def show_info(name,root):
   mycursor.execute(myquery, (name,))
   result = mycursor.fetchone()
   top = tk.Toplevel(root)
-  top.geometry("600x400")
+  top.geometry("600x500")
   top.title(result[0])  # set the window title to the champion name
 
   # create a label with the champion's name at the top

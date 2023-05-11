@@ -5,6 +5,7 @@ import Players
 import Guilds
 import Errorfun
 import sys
+import webbrowser
 
 def main():
     while True:
@@ -114,8 +115,10 @@ def menu(choice,root):
                 #Guilds.Guildsinlol(guildchoice)
             except:
                 Errorfun.Errorcase()
+
+
         case other:
-            print("called it")
+            webbrowser.open("https://youtu.be/mx86-rTclzA")
             Errorfun.Qcase()
 
 main()

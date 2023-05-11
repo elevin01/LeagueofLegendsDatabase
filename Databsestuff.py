@@ -56,14 +56,24 @@ def Champion_name(name,root):
 import tkinter as tk
 import mysql.connector
 import Champions
-
+"""
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
   password="password",
   database="league"
 )
-
+"""
+try:
+  mydb = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="password",
+    database="league"
+  )
+except mysql.connector.Error as err:
+  print(f"Error connecting to database: {err}")
+  exit(1)
 def show_info(name,root):
   # execute SQL query to get additional information for the selected champion
   mycursor = mydb.cursor()
@@ -146,7 +156,6 @@ def Champion_play(root):
     count = 0
     for ch in guild_choices:
       champions.append(str(ch[0]))
-      print(champions[count])
       count = count+1
     return champions
   else:

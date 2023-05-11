@@ -1,5 +1,7 @@
 import Errorfun
 import tkinter
+import Databsestuff
+from tkinter import messagebox
 """
 def champions(champchoice, root):
     match champchoice:
@@ -37,7 +39,7 @@ def champions(champchoice, root):
             champ_label.pack(pady=10)
             champ_entry = tkinter.Entry(root)
             champ_entry.pack()
-            submit_button = tkinter.Button(root, text="Submit", command=lambda: Champsearch(champ_entry.get()))
+            submit_button = tkinter.Button(root, text="Submit", command=lambda: Champsearch(champ_entry.get(),root))
             submit_button.pack()
 
         case 2:
@@ -49,41 +51,23 @@ def champions(champchoice, root):
             lane_choice.set("Select a lane")
             dropdown = tkinter.OptionMenu(root, lane_choice, *lane_choices.keys())
             dropdown.pack()
-            submit_button = tkinter.Button(root, text="Submit", command=lambda: Lanesearch(lane_choices[lane_choice.get()]))
+            submit_button = tkinter.Button(root, text="Submit", command=lambda: Lanesearch(lane_choices[lane_choice.get()],root))
             submit_button.pack()
 
         case other:
             Errorfun.Errorswitch()
 
-def Champsearch(champname):
+def Champsearch(champname,root):
     #
     champ = str(champname).strip()
-    quit()
+    Databsestuff.Champion_name(champ,root)
 
 
-def Lanesearch(lanechoice):
-    lane = ""
-    match lanechoice:
-        case "top":
-            print("\tTop Lane (Baron Lane)")
-            lane = "top"
-            #
-        case "mid":
-            print("\tMid Lane")
-            lane = "mid"
-            #
-        case "duo":
-            print("\tBot Lane (Dragon Lane - ADC)")
-            lane = "duo"
-            #
-        case "sup":
-            print("\tSupport Lane (Dragon Lane - Support)")
-            lane = "sup"
-            #
-        case "jg":
-            print("\tJungle ")
-            lane = "jg"
-        case other:
-            Errorfun.Errorswitch()
+def Lanesearch(lanechoice,root):
+    lane = str(lanechoice)
+    if not lane:
+        messagebox.showerror("!", "Choose a lane")
+        return
+    Databsestuff.lane_choice(lane,root)
 
-    quit()
+

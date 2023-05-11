@@ -1,23 +1,16 @@
 import mysql.connector
 import Errorfun
 import GuildData
+import PlayerData
 import tkinter
 from tkinter import messagebox
-
-mydb = mysql.connector.connect(
-  host="localhost",
-  user="username",
-  password="pass123",
-  database="loldb"
-)
-mycursor = mydb.cursor()
 
 def Guildsinlol(guildchoice, root):
     for widget in root.winfo_children():
         widget.destroy()
     guildlabel = tkinter.Label(root, text="Guild Menu ", font=("Ariel", 20))
     guildlabel.pack(pady=15)
-    root.geometry('600x500')
+    root.geometry('600x550')
     match guildchoice:
         case 1:
             guildname = tkinter.Label(root, text="Enter Guild name: ", font=("Ariel", 20))
@@ -37,12 +30,6 @@ def Guildsinlol(guildchoice, root):
                 except:
                     Errorfun.Errorswitch()
                 GuildData.findGuild(guild_name,root)
-
-
-            myquery = "SELECT * FROM GUILD AS G WHERE G.name = " + guildname
-            mycursor.execute (myquery)
-            for x in mycursor:
-                print(x)
 
         case 2:
             getGuild(root)
@@ -92,8 +79,6 @@ def Guildsinlol(guildchoice, root):
 
             #
             """
-            myquery = "INSERT INTO GUILD VALUES(" + guildname + "," + guildcreator + "," + creatid + "," + guild1v1 + ")"
-            mycursor.execute (myquery)
             # Look at above two lines again
         case other:
             Errorfun.Errorswitch()
@@ -137,6 +122,9 @@ def getGuild(root):
         guild_crid = str(guild_crid)
         if not len(guild_crid) == 4:
             messagebox.showerror("Error", "Creator ID length cannot exceed 4 characters")
+            return
+        if not PlayerData.authen(guild_crname,guild_crid,root):
+            messagebox.showerror("Error", "Invalid Creator name and ID")
             return
         if not guild_name:
             Errorfun.Errorcase()

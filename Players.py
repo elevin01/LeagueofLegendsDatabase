@@ -1,15 +1,10 @@
-import mysql.connector
 import Errorfun
 import tkinter
 from tkinter import messagebox
+import Databsestuff
+import PlayerData
+import GuildData
 
-mydb = mysql.connector.connect(
-  host="localhost",
-  user="username",
-  password="pass123",
-  database="loldb"
-)
-mycursor = mydb.cursor()
 
 def Players(playerchoice, root):
     for widget in root.winfo_children():
@@ -22,20 +17,14 @@ def Players(playerchoice, root):
             playername.pack(pady=10)
             name_input = tkinter.Entry(root)
             name_input.pack()
-            submit_button = tkinter.Button(root, text="Submit", command=lambda : print(name_input.get()))
+            submit_button = tkinter.Button(root, text="Submit", command=lambda : PlayerData.getPlaya(str(name_input.get()),root))
             submit_button.pack()
 
-            myquery = "SELECT * FROM PLAYER AS P WHERE P.username =" + name_input
-            mycursor.execute (myquery)
-            for x in mycursor:
-                print(x)
         case 2:
             playerrank = tkinter.Label(root, text="Player List")
             playerrank.pack()
-            myquery = "SELECT * FROM PLAYER AS P WHERE P.ranks =" + playerrank
-            mycursor.execute (myquery)
-            for x in mycursor:
-                print(x)         #look at connector code again
+            PlayerData.allplaya(root)
+
         case 3:
             """
             print("Enter player username: ")
@@ -106,8 +95,8 @@ def Players(playerchoice, root):
             except:
                 Errorfun.Errorcase()
             """
-            root.geometry("600x500")
-            playername = tkinter.Label(root, text="Enter player username: ")
+            root.geometry("600x550")
+            playername = tkinter.Label(root, text="Enter the name of the player name: ")
             playername.pack(pady=10)
             name_input = tkinter.Entry(root)
             name_input.pack()
@@ -115,11 +104,16 @@ def Players(playerchoice, root):
             playerid.pack(pady=10)
             id_input = tkinter.Entry(root)
             id_input.pack()
+            champs = Databsestuff.Champion_play(root)
+            champ_choice = tkinter.StringVar(root)
+            champ_choice.set("Select a champion")
+            dropdown = tkinter.OptionMenu(root, champ_choice, *champs)
+            dropdown.pack(pady=10)
             lane_choices = {
                             "Top Lane (Baron Lane)": "top",
                             "Mid Lane": "mid",
-                            "Bot Lane (Dragon Lane - ADC)": "bot",
-                            "Support (Dragon Lane - Support)": "sup",
+                            "Bot Lane (Dragon Lane - ADC)": "duo",
+                            "Support Lane (Dragon Lane - Support)": "sup",
                             "Jungle": "jg"
                             }
             lane_choice = tkinter.StringVar(root)
@@ -141,6 +135,11 @@ def Players(playerchoice, root):
             rank_choice.set("Select a rank")
             dropdown = tkinter.OptionMenu(root, rank_choice, *rank_choices)
             dropdown.pack(pady=10)
+            guild_choices = GuildData.getAll()
+            guild_choice = tkinter.StringVar(root)
+            guild_choice.set("Select a guild")
+            dropdown = tkinter.OptionMenu(root, guild_choice, *guild_choices)
+            dropdown.pack(pady=10)
             playerlvl = tkinter.Label(root, text="Enter Player Level: ")
             playerlvl.pack(pady=10)
             lvl_input = tkinter.Entry(root)
@@ -158,6 +157,11 @@ def Players(playerchoice, root):
                 if not len(player_id) == 4:
                     messagebox.showerror("Error", "Player ID length cannot exceed 4 characters")
                     return
+                player_champ = champ_choice.get()
+                player_champ = str(player_champ)
+                if not player_champ:
+                    Errorfun.Errorswitch()
+                    return
                 player_lane = lane_choice.get()
                 player_lane = str(player_lane)
                 if not player_lane:
@@ -166,6 +170,11 @@ def Players(playerchoice, root):
                 player_rank = rank_choice.get()
                 player_rank = str(player_rank)
                 if not player_rank:
+                    Errorfun.Errorswitch()
+                    return
+                player_guild = guild_choice.get()
+                player_guild = str(player_guild)
+                if not player_guild:
                     Errorfun.Errorswitch()
                     return
                 player_lvl = lvl_input.get()
@@ -178,13 +187,13 @@ def Players(playerchoice, root):
                    face = True
                 if face:
                     return
-            myquery = "INSERT INTO PLAYER VALUES(" + player_name + "," + player_id + "," + player_lane + "," + player_rank + "," + player_lvl + ")" 
-            mycursor.execute (myquery) # Going to have to look at this
+                PlayerData.addplaya(player_name,player_id,player_lane,player_rank,player_lvl,player_champ,player_guild,root)
+
         case 4:
             root.geometry("600x500")
             player_namelabel = tkinter.Label(root, text="Edit Player Information", font=("Ariel", 16))
             player_namelabel.pack(pady=15)
-            player_ed1 = tkinter.Label(root,text="Enter Player username: ")
+            player_ed1 = tkinter.Label(root,text="Enter Player name: ")
             player_ed1.pack(pady=10)
             player_name = tkinter.Entry(root)
             player_name.pack()
@@ -195,12 +204,105 @@ def Players(playerchoice, root):
             submit_button2 = tkinter.Button(root, text="Submit", command=lambda: edit01())
             submit_button2.pack(pady=20)
             def edit01():
-                #authentication goes here
-                player_ed1 = tkinter.Label(root, text="Code not written yet ")
-                player_ed1.pack(pady=10)
-                Errorfun.Qcase()
-            myquery = "UPDATE PLAYER SET main_lane = " + player_lane + ", ranks = " + player_rank + ", 1v1 = " + player_lvl + " WHERE username = " + player_name + " AND id = " + player_id; 
-            mycursor.execute (myquery) # Going to have to look at this Assumming player_lane etc are the new updated fields.
+                name = player_name.get()
+                name = str(name)
+                if not name:
+                    Errorfun.Errorswitch()
+                    return
+                id = player_id.get()
+                id = str(id)
+                if not len(id) == 4:
+                    messagebox.showerror("Error", "Player ID length cannot exceed 4 characters")
+                    return
+                data = PlayerData.authen(name,id,root)
+                if not data:
+                    messagebox.showerror("Error", "Player doesn't exist")
+                    return
+                else:
+                    root.geometry("600x700")
+                    player_namelabel = tkinter.Label(root, text="Edit Player Information - " + data[0]+"#"+data[1], font=("Ariel", 16))
+                    player_namelabel.pack(pady=15)
+
+                    lane_choices = {
+                        "Top Lane (Baron Lane)": "top",
+                        "Mid Lane": "mid",
+                        "Bot Lane (Dragon Lane - ADC)": "duo",
+                        "Support Lane (Dragon Lane - Support)": "sup",
+                        "Jungle": "jg"
+                    }
+                    lane_choice = tkinter.StringVar(root)
+                    lane_choice.set(data[2])
+                    dropdown = tkinter.OptionMenu(root, lane_choice, *lane_choices.keys())
+                    dropdown.pack(pady=10)
+                    rank_choices = [
+                        "Iron",
+                        "Bronze",
+                        "Silver",
+                        "Gold",
+                        "Platinum",
+                        "Diamond",
+                        "Master",
+                        "Grandmaster",
+                        "Challenger"
+                    ]
+                    rank_choice = tkinter.StringVar(root)
+                    rank_choice.set(data[3])
+                    dropdown = tkinter.OptionMenu(root, rank_choice, *rank_choices)
+                    dropdown.pack(pady=10)
+                    playerlvl = tkinter.Label(root, text="Level ")
+                    playerlvl.pack(pady=10)
+                    lvl_input = tkinter.Entry(root)
+                    lvl_input.insert(0, data[4])
+                    lvl_input.pack()
+                    champs = Databsestuff.Champion_play(root)
+                    champ_choice = tkinter.StringVar(root)
+                    champ_choice.set(data[5])
+                    dropdown = tkinter.OptionMenu(root, champ_choice, *champs)
+                    dropdown.pack(pady=10)
+                    guild_choices = GuildData.getAll()
+                    guild_choice = tkinter.StringVar(root)
+                    guild_choice.set(str(GuildData.getname(data[6],data[7])))
+                    dropdown = tkinter.OptionMenu(root, guild_choice, *guild_choices)
+                    dropdown.pack(pady=10)
+                    submit_button2 = tkinter.Button(root, text="Submit", command=lambda: editplaya())
+                    submit_button2.pack(pady=20)
+
+                    def editplaya():
+                        player_name = name
+                        player_id = id
+                        player_champ = champ_choice.get()
+                        player_champ = str(player_champ)
+                        if not player_champ:
+                            Errorfun.Errorswitch()
+                            return
+                        player_lane = lane_choice.get()
+                        player_lane = str(player_lane)
+                        if not player_lane:
+                            Errorfun.Errorswitch()
+                            return
+                        player_rank = rank_choice.get()
+                        player_rank = str(player_rank)
+                        if not player_rank:
+                            Errorfun.Errorswitch()
+                            return
+                        player_guild = guild_choice.get()
+                        player_guild = str(player_guild)
+                        if not player_guild:
+                            Errorfun.Errorswitch()
+                            return
+                        player_lvl = lvl_input.get()
+                        face = False
+                        try:
+                            player_lvl = int(player_lvl)
+                            face = False
+                        except:
+                            messagebox.showerror("Error", "Player level must be a number")
+                            face = True
+                        if face:
+                            return
+                        PlayerData.updateplaya(player_name, player_id, player_lane, player_rank, player_lvl,
+                                            player_champ, player_guild, root)
+
 
         case other:
             Errorfun.Errorcase()

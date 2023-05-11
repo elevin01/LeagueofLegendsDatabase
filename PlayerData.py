@@ -66,7 +66,7 @@ def show_info(name,root):
 def allplaya(root):
   for widget in root.winfo_children():
     widget.destroy()
-  guildlabel = tk.Label(root, text="ALL PLAYERS ", font=("Ariel", 20))
+  guildlabel = tk.Label(root, text="PLAYERS - LEVEL", font=("Ariel", 20))
   guildlabel.pack(pady=15)
   root.geometry('400x600')
   mycursor = mydb.cursor()
@@ -126,4 +126,20 @@ def updateplaya(username, id, main_lane, ranks, lvl, main_champ, guild, root):
   mydb.commit()
   show_info(username,root)
   button = tk.Button(root, text="Update Again", command=lambda: Players.Players(4, root))
+  button.pack(pady=20)
+
+def getPlaya(name,root):
+  for widget in root.winfo_children():
+    widget.destroy()
+  guildlabel = tk.Label(root, text="PLAYER SEARCH ", font=("Ariel", 20))
+  guildlabel.pack(pady=15)
+  root.geometry('400x600')
+  mycursor = mydb.cursor()
+  myquery = "SELECT username FROM PLAYER WHERE username LIKE %s"
+  mycursor.execute(myquery, ("%" + name + "%",))
+  results = mycursor.fetchall()
+  for result in results:
+    button = tk.Button(root, text=result[0], command=lambda name=result[0]: show_info(name, root))
+    button.pack()
+  button = tk.Button(root, text="Back", command=lambda: Players.Players(1, root))
   button.pack(pady=20)
