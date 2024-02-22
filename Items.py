@@ -1,4 +1,8 @@
 import Errorfun
+import tkinter
+import ItemData
+from tkinter import messagebox
+"""
 def Item(itemchoice):
      match itemchoice:
                 case 1: 
@@ -23,22 +27,37 @@ def Item(itemchoice):
                     
                 case other: 
                    Errorfun.Errorswitch()
-                    
-                    
-def Itemchooser(itemtype):
-    match itemtype:
-        case 1: 
-            print("\tAttack Damage\n")
-            #
-        case 2: 
-            print("\tMagic Damage\n")
-            #
+"""
+def Item(itemchoice, root):
+    for widget in root.winfo_children():
+        widget.destroy()
+    itemlabel = tkinter.Label(root, text="Item Selection", font=("Ariel", 20))
+    itemlabel.pack(pady=15)
+    match itemchoice:
+        case 1:
+            item_label = tkinter.Label(root, text="Enter Item name:", font=("Ariel", 16))
+            item_label.pack(pady=10)
+            itemchoice = tkinter.Entry(root)
+            itemchoice.pack()
+            submit_button = tkinter.Button(root, text="Submit", command=lambda : ItemData.getitem(str(itemchoice.get()),root))
+            submit_button.pack()
+        case 2:
+            item_type = tkinter.StringVar(root)
+            itemtypes = ["Fighter", "Mage", "Tank", "Support", "Assassin", "Marksman", "Boots"]
+            dropdown = tkinter.OptionMenu(root,item_type, *itemtypes)
+            dropdown.pack()
+            submit_button = tkinter.Button(root, text="Submit", command=lambda : Itemchooser(item_type.get(),root))
+            submit_button.pack()
         case 3:
-            print("\tDefense Items")
-            #
-        case 4: 
-            print("\tBoots")
-            #
-        case other: 
-            Errorfun.Errorswitch()
-            
+            itemlabel = tkinter.Label(root, text="ALL ITEMS")
+            itemlabel.pack()
+            ItemData.allitem(root)
+        case other:
+            Errorfun.Errorcase()
+            quit()
+
+
+def Itemchooser(itemtype,root):
+    type = str(itemtype).strip()
+    ItemData.gettype(type,root)
+
