@@ -110,11 +110,11 @@ def Players(playerchoice, root):
             dropdown = tkinter.OptionMenu(root, champ_choice, *champs)
             dropdown.pack(pady=10)
             lane_choices = {
-                            "Top Lane (Baron Lane)": "top",
-                            "Mid Lane": "mid",
-                            "Bot Lane (Dragon Lane - ADC)": "duo",
-                            "Support Lane (Dragon Lane - Support)": "sup",
-                            "Jungle": "jg"
+                            "Top Lane (Baron Lane)": "Top",
+                            "Mid Lane": "Mid",
+                            "Bot Lane (Dragon Lane - ADC)": "ADC",
+                            "Support Lane (Dragon Lane - Support)": "Sup",
+                            "Jungle": "Jungle"
                             }
             lane_choice = tkinter.StringVar(root)
             lane_choice.set("Select a lane")
@@ -159,21 +159,29 @@ def Players(playerchoice, root):
                     return
                 player_champ = champ_choice.get()
                 player_champ = str(player_champ)
+                if player_champ == "Select a champion":
+                    player_champ = "Ashe"
                 if not player_champ:
                     Errorfun.Errorswitch()
                     return
                 player_lane = lane_choice.get()
                 player_lane = str(player_lane)
+                if player_lane == "Select a lane":
+                    player_lane = "Top"
                 if not player_lane:
                     Errorfun.Errorswitch()
                     return
                 player_rank = rank_choice.get()
                 player_rank = str(player_rank)
+                if player_rank == "Select a rank":
+                    player_rank = "Iron"
                 if not player_rank:
                     Errorfun.Errorswitch()
                     return
                 player_guild = guild_choice.get()
                 player_guild = str(player_guild)
+                if player_guild == "Select a guild":
+                    player_guild = "ManEater"
                 if not player_guild:
                     Errorfun.Errorswitch()
                     return

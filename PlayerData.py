@@ -68,7 +68,7 @@ def allplaya(root):
     widget.destroy()
   guildlabel = tk.Label(root, text="PLAYERS - LEVEL", font=("Ariel", 20))
   guildlabel.pack(pady=15)
-  root.geometry('400x600')
+  root.geometry('400x800')
   mycursor = mydb.cursor()
   myquery = "SELECT P.username,P.lvl FROM PLAYER AS P ORDER BY P.lvl desc;"
   mycursor.execute(myquery)

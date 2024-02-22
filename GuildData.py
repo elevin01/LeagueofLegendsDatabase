@@ -52,7 +52,7 @@ def getGuild(name,root):
     mycursor.execute(myquery, (name,))
     result = mycursor.fetchone()
     top = tk.Toplevel(root)
-    top.geometry("400x400")
+    top.geometry("400x300")
     top.title(result[2])  # set the window title to the champion name
 
     # create a label with the champion's name at the top
