@@ -29,7 +29,7 @@ CREATE TABLE CHAMPION (
   name varchar(255), race varchar(255), BE_cost int, 
   location varchar(255), class varchar(255), 
   best_item varchar(255), best_rune varchar(255),  
-  foreign key (location) references LOCATION(name),  
+  foreign key (location) references LOCA TION(name),
   foreign key (best_item) references ITEM(name), 
   foreign key (best_rune) references RUNE(name), primary key(name)
 );
